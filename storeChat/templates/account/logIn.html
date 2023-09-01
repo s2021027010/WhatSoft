@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /logIn.html  29 Aug 2022 10:04:03 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title  name="title">LogIn Page</title>
+    <meta name="keywords" content="Application Store, download, installed">
+    <meta name="description" content="Home Game Movie Type ">
+    <meta name="author" content="p-themes">
+    <meta name="apple-mobile-web-app-title" content="Home Game">
+    <meta name="application-name" content="Home game">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Favicon -->
+    {% load static %}
+    <!--
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/icons/favicon-16x16.png' %}">
+-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- custom css file link  -->
+    {% load static %}
+    
+    
+    <!-- custom css file link  -->
+    <!--<link rel="stylesheet" href="{% static 'css/main.css' %}">  -->
+    <link rel="stylesheet" href="{% static 'css/w3-box-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tab-layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/photoUpload.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/imageView.css' %}">
+    <link rel="stylesheet" href="{% static 'css/logInStyle.css' %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+   
+</head>
+
+<body>
+    <div class="w3-xlarge w3-top">
+        <b class="c-w"></b><b class="c-h"></b><b class="c-a"></b><b class="co-t"></b><b class="c-s"></b><b class="c-o"></b><b class="c-f"></b><b class="c-t"></b>
+      </div>
+    <div class=" w3-content col-head" >
+
+       
+            <div class="headlist">
+                <a href="{% url 'logIn' %}" class="head-item-logIn"><img class="icon-font" src="{{BASE_DIR}}/media/icons/logIn.png"  /></a> <b>|</b> 
+                <a href="{% url 'signUp' %}" class="head-item-signUp "><img class="icon-font" src="{{BASE_DIR}}/media/icons/signUp.png"  /> </a>
+            
+        </div>
+    </div>  
+</br> </br> </br> 
+    <div class=" w3-content  title-login-head" >
+        <b class="title-logIn"><img class="icon-font" src="{{BASE_DIR}}/media/icons/logIn.png"  /> LogIn</b>
+        {% block content %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} style="color: green;" class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+    </div> 
+    <div class=" w3-content area-logIn">
+        <form action=""  method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="col">
+            <label class="w3-opacity">Your Email* </label></br>
+            <input type="email" name="input_Email" class="input-box" title="Enter Your Email here" placeholder="abc123@example.com" required ><img class="icon-font" style="position: relative; left: -1rem;" src="{{BASE_DIR}}/media/icons/email.png"  /></input> 
+        </div></br>
+        <div class="col">
+            <label class="w3-opacity">Password* </label></br>
+            <input type="password" name="input_password" class="input-box" title="Enter Your Password here" placeholder="Your Password" required ><img class="icon-font" style="position: relative; left: -1rem;" src="{{BASE_DIR}}/media/icons/password.png"  /></input> 
+        </div></br>
+        <div class="col">
+            <a href="{% url 'forgotPassword' %}">Forgot Password <img class="icon-font" src="{{BASE_DIR}}/media/icons/forgot-password.png"  /></a>
+            <button class="loginme" type="submit">LogIn</button>
+        </div>
+    </form>
+    </div>
+    {% endblock %}
+
+
+
+
+</body>
+</html>

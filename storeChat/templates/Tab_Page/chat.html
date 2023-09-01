@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /chat.html  29 Aug 2022 10:04:03 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title  name="title">Chat Page</title>
+    <meta name="keywords" content="WhatSoft Chat , Friend , Photo, Media , Video">
+    <meta name="description" content="WhatSoft Chat">
+    <meta name="author" content="p-themes">
+    <meta name="apple-mobile-web-app-title" content="WhatSoft Chat">
+    <meta name="application-name" content="WhatSoft Chat">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Favicon -->
+    {% load static %}
+    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--
+        
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/icons/favicon-16x16.png' %}">
+-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slice-html@latest"></script>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- custom css file link  -->
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+    
+    
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/w3-box-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tab-layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/photoUpload.css' %}">
+    <link rel="stylesheet" href="{% static 'css/readmorechat.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/imageView.css' %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <style>
+        video {
+            width: 100%;
+            height: auto;
+        }
+   </style>
+  
+
+
+</head>
+
+<body>
+    
+<!-- ----------------------------------------------- Header Era -------------------------------- -->
+{% include "header.html" %} 
+
+
+    {% block content %}
+        {% if user.is_authenticated %}
+
+
+<!-- ----------------------------------------------- Body Era -------------------------------- -->
+  <div class=" w3-content w3-container color-gray" >
+
+    <div class="w3-padding-4 " >
+  
+       
+        </br>
+         
+              <!--                                   Message Box    -->
+              
+              {% for myProfile in profile_post %}
+              {% if user in myProfile.db_friend_reciever.all and user in myProfile.db_friend_sender.all %}
+                <a href="/message/{{myProfile.char_email}}">
+              <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+                <img src="{{BASE_DIR}}/media/{{myProfile.db_photo}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; max-width: 60px; max-height: 60px; min-width: 60px; min-height: 60px;">
+                <span class="w3-right w3-opacity"> {{sms.db_date_sms}} </span>
+                <h4>{{myProfile.db_firstName}} {{myProfile.db_lastName}}
+                    {% if myProfile.db_last_login > myProfile.db_last_logout %}
+                    <span class="online fa fa-circle"></span>
+                    {% else %}
+                    <span class="offline ">{{myProfile.db_last_logout}}</span>
+                    {% endif %}
+                </h4>  
+                  {% for sms in sms_obj_both reversed %}  
+                    {% if sms.email_sms_reciever == myProfile.char_email and sms.email_sms_sender == user.email or  sms.email_sms_sender == myProfile.char_email and sms.email_sms_reciever == user.email %}
+                    {% if forloop.first or forloop.last %}
+                    <span class="w3-opacity w3-left read-more-text-chat text-post"> 
+                    {{sms.sms_text}} 
+                    </span>
+                    {% endif %}    
+                    {% endif %}   
+                  {% endfor %} 
+                <hr class="w3-clear"></hr>
+            </div>
+          </a>  
+            {% endif %} 
+        {% endfor %} 
+   
+
+      
+    </div>
+  </div>
+
+  {% endif %}
+  {% endblock %}
+
+<!-- /chat.html  22 Aug 2022 10:04:03 GMT -->
+
+</body>
+<!-- custom js file link  -->
+{% load static %}
+<script src="{% static 'js/Nav.js' %}"></script>
+<script src="{% static 'js/uploadPhoto.js' %}"></script>
+<script src="{% static 'js/newPhoto.js' %}"></script>
+<script src="{% static 'js/tab-Lout.js' %}"></script> 
+<script src="{% static 'js/readmorechat.js' %}"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<script>
+  inputUpImage.onchange = evt => {
+  const [file] = inputUpImage.files
+  
+  if (file) {
+      img.src = URL.createObjectURL(file)
+      }
+  }
+  inputUpVideo.onchange = evt => {
+  const [file] = inputUpVideo.files
+  
+  if (file) {
+      vid.src = URL.createObjectURL(file)
+      }
+  }
+</script>
+
+
+
+
+       
+</html>

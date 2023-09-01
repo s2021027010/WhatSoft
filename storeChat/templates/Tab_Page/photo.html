@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /photo.html  29 Aug 2022 10:04:03 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title  name="title">Photo Page</title>
+    <meta name="keywords" content="WhatSoft Chat , Friend , Photo, Media , Video">
+    <meta name="description" content="WhatSoft Chat">
+    <meta name="author" content="p-themes">
+    <meta name="apple-mobile-web-app-title" content="WhatSoft Chat">
+    <meta name="application-name" content="WhatSoft Chat">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Favicon -->
+    {% load static %}
+    <!--
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/icons/favicon-16x16.png' %}">
+-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slice-html@latest"></script>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- custom css file link  -->
+    {% load static %}
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+    
+    
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/w3-box-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tab-layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/photoUpload.css' %}">
+    <link rel="stylesheet" href="{% static 'css/readmore.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/imageView.css' %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <style>
+        video {
+            width: 100%;
+            height: auto;
+        }
+   </style>
+  
+
+
+</head>
+
+<body>
+    
+
+
+<!-- ----------------------------------------------- Header Era -------------------------------- -->
+{% include "header.html" %} 
+
+
+    {% block content %}
+        {% if user.is_authenticated %}
+<!-- ----------------------------------------------- Body Era -------------------------------- -->
+  <div class=" w3-content w3-container color-gray" >
+{% load custom_tag %}
+   
+<div class="w3-padding-4 " >
+</br>
+
+     <!--                              Post Era   -->
+
+    <div class="w3-row-padding" title="Press Button 'Create Post'">
+        <div class="w3-card w3-round w3-light-gray" >
+            <div class="w3-container w3-padding">
+                {% for myProfile in obj_profile %}
+                    {% if forloop.first %}
+                        
+                    <img src="{{BASE_DIR}}/media/{{myProfile.db_photo}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; max-width: 60px; max-height: 60px; min-width: 60px; min-height: 60px;">
+                        
+                <h4>{{ user.first_name }} {{user.last_name }}
+                    {% if myProfile.db_last_login > myProfile.db_last_logout %}
+                    <span class="online fa fa-circle"></span>
+                    {% else %}
+                    <span class="offline  ">{{myProfile.db_last_logout}}</span>
+                      
+                    {% endif %}
+                </h4>
+                {% endif %}
+                {% endfor %}
+            </br>
+                <div class="tab w3-light-gray w3-center">
+                    <button  class="tablinks postButton w3-button w3-theme" title="Click Me!"  onclick="openCity(event, 'Post')"><i class="fa fa-pencil"></i> Create Post</button> 
+                    <h6 class="w3-opacity textalign " > What's on your Mind*</h6>
+                    <p>
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                <li {% if message.tags %} style="color: green;" class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                       
+                        </p>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div id="Post" class="tabcontent"><!-- Tab Content   -->
+    <div class="w3-row-padding">
+        <div class="w3-card w3-round w3-white">
+            
+            <div class="w3-container w3-padding">
+                <form  action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for myProfile in obj_profile %}
+                    {% if forloop.first %}
+                    <input type="text" value="{{myProfile.id}}" name="input_Id"  hidden="true" ></input>
+                    {% endif %}
+                    {% endfor %}
+                    <input type="text" value="{{user.email}}" name="input_Email"  hidden="true" ></input>
+                    <textarea name="input_Post" class="w3-border w3-padding" placeholder="Status ..." style="min-width: 860px; min-height: 76px; max-height: 247px; max-width: 860px; width: 540px; height: 76px;" maxlength="50000" ></textarea>
+                    <div class="col">
+                        <label class="w3-opacity">Status* </label>
+                        <div name="input_Status" class="input-box-status">
+                            <select id="options"  name="input_Status"  class="selectdata custom-select" required>
+                                <option  value="" disabled selected>Select Status</option>
+                                <option  name="input_Status" value="Public">Public</option>
+                                <option  name="input_Status" value="Friend">Friend</option>
+                                <option  name="input_Status" value="Private">Private</option>
+                            </select>
+                                
+                        </div>
+                    </div>
+                    <h4 class="w3-clear"></h4>
+                        <div class="w3-button w3-theme " >
+                            <input type="file"  name="inputUpImage"  hidden="false"  class="d-none" accept="image/*|image/heic|image/heif" onchange="previewFiles()" id="inputUpImage" multiple>
+                                <a class="mediaUp">Image : <i  class="material-icons"  data-tippy="add (Photo)" onclick="trgger('inputUpImage')" aria-required="true">perm_media</i></a>
+                        </div> 
+                        <button type="submit"  href="javascript:void(0);" class="w3-button w3-theme w3-right"><i class="fa fa-pencil"></i> Post</button> 
+                
+                    </form>
+                    
+                    <form runat="server">
+                        <div id="error_msg_img" class="error_msg_img error_msg_vid"></div>
+                        <img  preload="auto"  id="img" class="img photoView fa fa-image" src="#" alt="Show image" />
+                        <video  class="videoView" >
+                    </form>
+                    
+              
+                </div>
+            </div>
+    </div>
+
+    </div><!-- End Tab Content   -->
+
+    
+         
+              <!--                                   Photo  Era   -->
+              {% for myPost_Img in Img_Post_obj %}
+              {% for myProfile in profile_post %}
+                {% if myPost_Img.db_username_image == myProfile.char_email and myPost_Img.db_type_image == "Image" %}
+               
+            <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+                <img src="{{BASE_DIR}}/media/{{myProfile.db_photo}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; max-width: 60px; max-height: 60px; min-width: 60px; min-height: 60px;">
+                <span class="w3-right w3-opacity">{{myPost_Img.db_date_image}}</span>
+                <h4>{{myProfile.db_firstName}} {{myProfile.db_lastName}}
+                    {% if myProfile.db_last_login > myProfile.db_last_logout %}
+                    <span class="online fa fa-circle"></span>
+                    {% else %}
+                    <span class="offline">{{myProfile.db_last_logout}}</span>
+                    {% endif %}
+                </h4>
+                <span class="fa fa-circle w3-opacity w3-left"> {{myPost_Img.db_status_image}}</span>
+            </br><hr class="w3-clear"></hr>
+                <p  class="read-more-text text-post">{{myPost_Img.db_text_image}}
+                </p>
+                
+                <div class="w3-padding-4 w3-center">
+                <div class="w3-row-padding w3-center" style="margin:0 -1px">
+                    <div class="w3-center">
+                    <img src="{{BASE_DIR}}/media/{{myPost_Img.db_images}}" style="width: 600px; height: 300px;" alt="Northern Lights" class="w3-margin-bottom">
+                    </div>
+                
+                </div>
+                <div class="tab w3-light-gray w3-center">
+                    <div class="commSpace">
+                    <button type="submit" class="tablinks  w3-button w3-theme-d2 w3-margin-bottom"  title="Click Me!"  onclick="openCity(event, 'Img/{{myPost_Img.id}}')">
+                        {{myPost_Img.id|comment_count_Img}}
+                        <i class="fa fa-comment"></i> Comment</button> 
+                    </div>
+                    
+            <div class="shareSpace">
+                <form  id="img-share-form_{{myPost_Img.id}}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" value="{{myPost_Img.id}}" id="input_forKey_Share_Img"  name="input_forKey_Share_Img"  hidden="true" ></input>
+                    <input type="text" value="{{myPost_Img.id}}" id="input_id_Share_Img"  name="input_id_Share_Img"  hidden="true" ></input>
+                    <input type="text" value="{{myPost_Img.db_username_image}}" id="input_sender_email_Img"  name="input_sender_email_Img"  hidden="true" ></input>
+                    <input type="text" value="{{user.email}}" id="input_shareby_email_Img"  name="input_shareby_email_Img"  hidden="true" ></input>
+                
+                <button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom">
+                    {{myPost_Img.id|share_count_Img}}
+                    <i class="fa fa-share"></i> Share</button>  
+                </form>
+                
+                <script text="text/javascript">
+                    $(document).on('submit', "#img-share-form_{{myPost_Img.id}}" , function(e){
+                        e.preventDefault();
+                        var dataString_share_Img = $("#img-share-form_{{myPost_Img.id}}").serialize();
+                        $.ajax({
+                            type: 'post',
+                            url : "/Share_Img/",
+                            data: dataString_share_Img,
+                                success: function(html){
+                                                        location.reload();
+                                                    }
+                        });});
+                 </script>
+                </div>
+                <div class="likeSpace">
+                    <form id="img-like-form_{{myPost_Img.id}}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="text" value="{{myPost_Img.id}}" id="input_forKey_Like_Img" name="input_forKey_Like_Img"  hidden="true" ></input>
+                        <input type="text" value="{{myPost_Img.id}}" id="input_id_Like_Img"   name="input_id_Like_Img"  hidden="true" ></input>
+                        <input type="text" value="{{myPost_Img.db_username_image}}" id="input_sender_email_Img"  name="input_sender_email_Img"  hidden="true" ></input>
+                        <input type="text" value="{{user.email}}" id="input_shareby_email_Img"   name="input_shareby_email_Img"  hidden="true" ></input>   
+                    <button type="submit" class="w3-button w3-theme-d1 w3-margin-bottom">
+                        {{myPost_Img.id|like_count_Img}}
+                        <i class="fa fa-thumbs-up"></i> Like</button>
+                    </form>
+                    
+                <script text="text/javascript">
+                    $(document).on('submit', "#img-like-form_{{myPost_Img.id}}" , function(e){
+                        e.preventDefault();
+                        var dataString_like_Img = $("#img-like-form_{{myPost_Img.id}}").serialize();
+                        $.ajax({
+                            type: 'post',
+                            url : "/like_Img/",
+                            data: dataString_like_Img,
+                                success: function(html){
+                                                        location.reload();
+                                                    }
+                        });});
+                 </script>
+                </div>
+            </div>
+            <div id="Img/{{myPost_Img.id}}" class="tabcontent">
+                <form id="img-comment-form_{{myPost_Img.id}}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" value="{{myPost_Img.id}}"  id="input_forKey_Comment_Img"   name="input_forKey_Comment_Img"  hidden="true" ></input>
+                    <input type="text" value="{{myPost_Img.id}}"  id="input_id_Comment_Img"   name="input_id_Comment_Img"  hidden="true" ></input>
+                    <input type="text" value="{{myPost_Img.db_username_image}}" id="input_sender_email_Img"   name="input_sender_email_Img"  hidden="true" ></input>
+                    <input type="text" value="{{user.email}}" id="input_shareby_email_Img"   name="input_shareby_email_Img"  hidden="true" ></input>
+                    
+                    {% for myProfile in obj_profile %}
+                        {% if forloop.first %}
+                        <img src="{{BASE_DIR}}/media/{{myProfile.db_photo}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; max-width: 60px; max-height: 60px; min-width: 60px; min-height: 60px;">
+                        {% endif %}
+                    {% endfor %}
+                        <textarea name="input_comment_Img" class="w3-border w3-padding" placeholder="Comment ..." style="min-width: 770px; min-height: 76px; max-height: 247px; max-width: 770px; width: 500px; height: 76px;" maxlength="50000" ></textarea>
+
+                <button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i> Comment</button> 
+                </form>
+                <div>
+                    
+                    {% for comment_img in Comment_img %}
+                    {% if comment_img.email_comment_Image_sender == myPost_Img.db_username_image and comment_img.value_comment_Image == myPost_Img.value_comment_image %}
+                    {% for ImgProfile in profile_post %}
+                    {% if comment_img.email_comment_Image_by == ImgProfile.char_email %}
+                     <img src="{{BASE_DIR}}/media/{{ImgProfile.db_photo}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px; max-width: 60px; max-height: 60px; min-width: 60px; min-height: 60px;" />
+                     {% endif %}
+                     {% endfor %}
+                     <p class="read-more-text text-post " style="text-align: left;">
+                        <b style=" position: relative; top: -1rem;">{{ ImgProfile.db_firstName }} {{ ImgProfile.db_lastName }}</b></br>
+                             
+                         {{comment_img.comment_Text_Image }} 
+                     </p> 
+                       
+                     {% endif %}
+                     {% endfor %}
+                </div>
+                
+                <script text="text/javascript">
+                    $(document).on('submit', "#img-comment-form_{{myPost_Img.id}}" , function(e){
+                        e.preventDefault();
+                        var dataString_comment_Img = $("#img-comment-form_{{myPost_Img.id}}").serialize();
+                        $.ajax({
+                            type: 'post',
+                            url : "/Comment_Img/",
+                            data: dataString_comment_Img,
+                                success: function(html){
+                                                        location.reload();
+                                                    }
+                        });});
+                 </script>
+            </div>
+            </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+
+ 
+        
+      
+    </div>
+  </div>
+
+  {% endif %}
+  {% endblock %}
+<!-- /register.html  22 Aug 2022 10:04:03 GMT -->
+
+</body>
+          <!-- custom js file link  -->
+        {% load static %}
+          <script src="{% static 'js/Nav.js' %}"></script>
+          <script src="{% static 'js/uploadPhoto.js' %}"></script>
+          <script src="{% static 'js/newPhoto.js' %}"></script>
+          <script src="{% static 'js/tab-Lout.js' %}"></script>
+          <script src="{% static 'js/moreread.js' %}"></script>
+          <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+          
+          <script>
+            inputUpImage.onchange = evt => {
+            const [file] = inputUpImage.files
+            
+            if (file) {
+                img.src = URL.createObjectURL(file)
+                }
+            }
+            inputUpVideo.onchange = evt => {
+            const [file] = inputUpVideo.files
+            
+            if (file) {
+                vid.src = URL.createObjectURL(file)
+                }
+            }
+         </script>
+         
+
+         <!--
+            
+                    <script text="text/javascript">
+                        
+                        $(document).on('submit', "#post-form_{{myPost_Wrt.id}}" , function(e){
+                            e.preventDefault();
+                            
+                            var input_id_Like_wrt = "{{myPost_Wrt.id}}"
+                            var input_sender_email_wrt = "{{myPost_Wrt.db_username_post}}"
+                            var input_shareby_email_wrt = "{{user.email}}"
+                            $.ajax({
+                                type: 'post',
+                                url : "/like_wrt/",
+
+                                data: {
+                                    input_id_Like_wrt: input_id_Like_wrt,
+                                    input_sender_email_wrt: input_sender_email_wrt,
+                                    input_shareby_email_wrt: input_shareby_email_wrt,
+                                    
+                                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                                },
+                            });
+                        
+                        });
+                        
+                     </script>
+         -->
+         
+
+         
+</html>
