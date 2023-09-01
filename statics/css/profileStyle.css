@@ -1,0 +1,159 @@
+
+div.textBoxD {
+    position: fix;
+    left: 12%;
+    width: 80%;
+    height: 4rem;
+    border: none;
+    opacity: 85%;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+
+label.labelalgin {
+    position: relative;
+    left: 5%;
+    top: 0.5rem;
+    font: bold;
+}
+
+input.labelEmail {
+    position: relative;
+    left: 36%;
+    width: 63%;
+    height: 3rem;
+    top: 0.5rem;
+    border: none;
+    opacity: 85%;
+    padding-left: 4%;
+    
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+
+input.labelCountry {
+    position: relative;
+    left: 33%;
+    border: none;
+    width: 63%;
+    height: 3rem;
+    top: 0.5rem;
+    opacity: 85%;
+    padding-left: 4%;
+    
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+input.labelPhone {
+    position: relative;
+    left: 25%;
+    border: none;
+    width: 63%;
+    height: 3rem;
+    top: 0.5rem;
+    opacity: 85%;
+    padding-left: 4%;
+    
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+
+input.labelGender {
+    position: relative;
+    left: 34%;
+    border: none;
+    width: 63%;
+    height: 3rem;
+    top: 0.5rem;
+    opacity: 85%;
+    padding-left: 4%;
+    
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+
+input.labelBirth {
+    position: relative;
+    left: 28%;
+    border: none;
+    width: 63%;
+    height: 3rem;
+    top: 0.5rem;
+    opacity: 85%;
+    padding-left: 4%;
+    
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+/* Style the buttons inside the tab */
+.tab1 button {
+    background-color: #6c757d;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+ 
+  
+/* Change background color of buttons on hover */
+
+.tab1 button:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+button.tab-timeline::after {
+    content: "Timeline";
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+
+button.tab-about::after {
+    content: "About";
+    padding-left: 1rem ;
+    padding-right: 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 17px;
+    position: relative;
+    left:2%;
+}
+
+
+.icon-font-tab {
+    font-size: 12px;
+    width: 6%;
+    height: 6%;
+}
+

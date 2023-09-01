@@ -1,0 +1,57 @@
+body {
+  font-family: Arial;
+}
+
+
+form.txtSearch input[type=text] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid grey;
+  float: left;
+  width: 78%;
+  background: #f1f1f1;
+}
+
+
+
+
+form.txtSearch button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #b3b4b4;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.txtSearch button:hover {
+  background: #adabab;
+}
+
+form.txtSearch::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+
+
+
+.viewBox{
+  border: 0.1rem solid var(--gray); 
+  border-radius: 3rem; 
+  padding-left: 60px;  
+  padding-right: 60px;  
+  padding-bottom: 60px;
+  padding-top: 60px;
+  text-align: center;
+}
+
+.viewBox:hover{
+  background: var(--gray);
+  color:#fff;
+}

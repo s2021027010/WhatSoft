@@ -1,0 +1,6 @@
+.read-more-text-chat .read-more-button-chat {
+    /* CSS here */
+    display: inline;
+    color: rgb(158, 156, 156);
+    cursor :pointer;
+  }
