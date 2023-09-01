@@ -140,7 +140,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 's2021027010@umt.edu.pk' # 'LofinApp_Project.demo.django.login@gmail.com' 
-EMAIL_HOST_PASSWORD = 'Arshad@2020'
+EMAIL_HOST_PASSWORD = 'your mail password there'
 
 
 LOCAL_HOST_STRIPE = 'http://127.0.0.1:8000/'
